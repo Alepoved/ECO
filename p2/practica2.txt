@@ -1,0 +1,46 @@
+Alejandro Povedano Atienza
+An Wei Pham Luo
+
+
+vmstat:
+	
+	find / &> /dev/null: Disminuye el espacio disponible, aumenta el tamaño del buffer y de la cache, aumentan el numero de bloques de entrada/salida, aumenta el numero de interrupciones por segundo y switches de contexto.
+
+	sudo dd if=/dev/sda of=/dev/null count=1M: disminuye drasticamente el espacio disponible, aumenta el buffer y disminuye los bloques ocupados en la cache, bloques de entrada aumentan drasticamente,disminuyen los bloques de salida, las interrupciones y switches.
+
+	dd if=/dev/zero of=/var/tmp/prueba count=1M; sleep 10; rm 
+/var/tmp/prueba: casi no disminuye el espacio disponible, aumenta significativamente el buffer,y aumenta los bloques ocupados en la cache.Disminuyen los bloques de entrada y aumentan los de salida.
+
+	cpu_mem 1200: aumento drastico de swpd, aumento de espacio disponible y buffer. Cache disminuye el espacio disponible. Se producen muchas cambios de paginacion, tanto de entrada como de salida.
+
+
+Ejercicio 2:
+
+	/etc/default/sysstat: activa el sadc(si enable=true), lo que permite la recogida de informacion del sistema
+
+
+	etc/cron.d/sysstat: indica la ruta del script del debian-sa1, informes de las actividades realizados cada 10 minutos y un informe final a las 23:59 para cambiar el fichero donde guarda las estadisticas.
+
+	/etc/cron.daily/sysstat: contiene un script que genera un informe diario(resumen), eliminando todos los informes anteriores.
+
+	/etc/init.d/sysstat: dada una configuracion (/etc/sysconfig/sysstat), realiza un informe recopilando informacion del sistema cada 10 minutos por defecto.
+
+
+sar:
+
+	find / &> /dev/null:
+		numero de transacciones por segundo son 0, 1.01 y 0, siendo de mnedia 0.34.
+		El procentaje de uso de memoria aumenta de 11 a 16%.
+
+	dd if=/dev/zero of=/var/tmp/prueba count=1M:
+		numero de transacciones por segundo son 42.42, 0 y 0, siendo de mnedia 14.09.
+		El procentaje de uso de memoria aumenta de 11 a 65%.
+
+
+	./cpu_mem 1200:
+		numero de transacciones por segundo son 50, 227.27 y 145.5, siendo de mnedia 140.6(aumenta las peticiones de paginacion).
+		El procentaje de uso de memoria aumenta de 11 a 7%.
+
+		
+
+

@@ -1,0 +1,98 @@
+
+Alejandro Povedano
+An Wei Pham
+Optimizacion 0:
+sudo gcc edges.c -o prog -pg -g -O0 -fprofile-generate
+time ./prog img.pgm out0.pgm
+real	0m2.498s
+user	0m2.088s
+sys	0m0.328s
+
+sudo gcc edges.c -o prog -pg -g -O0 -fprofile-use
+real	0m2.491s
+user	0m2.020s
+sys	0m0.408s
+
+
+Optimizacion 1:
+sudo gcc edges.c -o prog -pg -g -O1 -fprofile-generate
+time ./prog img.pgm out1.pgm
+real	0m1.347s
+user	0m1.288s
+sys	0m0.024s
+sudo gcc edges.c -o prog -pg -g -O1 -fprofile-use
+real	0m1.308s
+user	0m1.112s
+sys	0m0.160s
+
+
+
+Optimizacion 2:
+sudo gcc edges.c -o prog -pg -g -O2 -fprofile-generate
+time ./prog img.pgm out2.pgm
+
+real	0m1.338s			
+user	0m1.308s
+sys	0m0.012s
+
+sudo gcc edges.c -o prog -pg -g -O2 -fprofile-use
+real	0m0.891s
+user	0m0.832s
+sys	0m0.020s
+
+
+optimizacion 3:
+sudo gcc edges.c -o prog -pg -g -O3 -fprofile-generate
+time ./prog img.pgm out3.pgm
+
+real	0m1.127s
+user	0m1.012s
+sys	0m0.096s
+
+sudo gcc edges.c -o prog -pg -g -O3 -fprofile-use
+
+real	0m0.570s
+user	0m0.540s
+sys	0m0.008s
+
+Cuanto mayor es el nivel de optimizacion, mas significativa es la reduccion del tiempo de ejecucion, al emplear el perfil de ejecucion.
+
+
+
+Ejercicio 2:
+
+ %   cumulative   self              self     total
+ time   seconds   seconds    calls   s/call   s/call  name
+ 75.98      1.22     1.22        2     0.61     0.61  gaussian
+ 23.04      1.59     0.37        1     0.37     0.37  laplacian
+  0.62      1.60     0.01        1     0.01     0.01  load_image_file
+  0.62      1.61     0.01        1     0.01     0.01  save_image_file
+  0.00      1.61     0.00        1     0.00     1.59  edges
+
+El mayor tiempo de ejecucion corresponde a la funcion gaussian con 1.22 segundos.
+
+F (fraccion de mejora)= 0.76
+K = 1.15 (15% mejor)
+A=1/((1-F)+ F/k)  => A = 1,11 => Se produce una mejora de ejecucion del 11%.
+
+tiempo mejorado = tiempo original/ A; T mejorado = 1,61/1,11 => tiempo mejorado = 1,45 segundos.
+
+
+La maxima mejora seria cuando F/k tiende a 0. => A =1/(1-F);
+
+A = 1/(1-F) => 4.16; La mejora maxima es de 316%;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
